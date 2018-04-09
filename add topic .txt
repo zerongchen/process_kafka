@@ -1,0 +1,13 @@
+/opt/cloudera/parcels/KAFKA/lib/kafka/bin/kafka-topics.sh --create --zookeeper hadoop-r720-1,hadoop-r720-2,hadoop-r720-3:2181/kafka_2 --replication-factor 2 --partitions 3 --topic testroy
+
+
+
+/opt/cloudera/parcels/KAFKA-2.1.1-1.2.1.1.p0.18/lib/kafka/bin
+./kafka-console-consumer.sh --zookeeper hadoop-r720-1:2181,hadoop-r720-3:2181,hadoop-r720-4:2181/kafka_2 --topic AppStatis --from-beginning --delete-consumer-offsets > ~/AppStatis.txt
+
+
+/opt/cloudera/parcels/KAFKA/lib/kafka/bin/kafka-console-consumer.sh --zookeeper hadoop-r720-1:2181,hadoop-r720-3:2181,hadoop-r720-4:2181/kafka_2 --topic     DevBrasQosStatis --from-beginning --delete-consumer-offsets > ~/DevBrasQosStatis.txt
+
+/opt/cloudera/parcels/KAFKA/lib/kafka/bin/kafka-console-consumer.sh --zookeeper hadoop-r720-1:2181,hadoop-r720-3:2181,hadoop-r720-4:2181/kafka_2 --topic     DevOltDnsQosStatis --from-beginning --delete-consumer-offsets > ~/.txt
+
+/opt/cloudera/parcels/KAFKA/lib/kafka/bin/kafka-console-consumer.sh --zookeeper hadoop-r720-1:2181,hadoop-r720-3:2181,hadoop-r720-4:2181/kafka_2 --topic     DevIcpDomainQosStatis --from-beginning --delete-consumer-offsets

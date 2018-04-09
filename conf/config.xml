@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- #kafka config -->
+    <zookeeper.connect>hadoop-r720-1:2181,hadoop-r720-3:2181,hadoop-r720-4:2181/kafka_2</zookeeper.connect>
+    <group.id>cmcc</group.id>
+	<zookeeper.session.timeout.ms>4000</zookeeper.session.timeout.ms>
+	<zookeeper.sync.time.ms>200</zookeeper.sync.time.ms>
+	<auto.commit.interval.ms>1000</auto.commit.interval.ms>
+	<auto.offset.reset>smallest</auto.offset.reset>
+    <!-- #hdfs config -->
+    <hdfs.uri>hdfs://192.168.5.101:8020/</hdfs.uri>
+    <hdfs.user>root</hdfs.user>
+    <!-- #hive config -->
+    <hive.jdbc.url>jdbc:hive2://192.168.5.95:10000/dgmobile</hive.jdbc.url>
+    <hive.jdbc.driver>org.apache.hive.jdbc.HiveDriver</hive.jdbc.driver>
+    <hive.jdbc.user>root</hive.jdbc.user>
+    <hive.jdbc.passwd></hive.jdbc.passwd>
+    <!-- #oracle config -->
+    <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
+	<db.url>jdbc:oracle:thin:@192.168.50.155:1521:bsmp</db.url>
+	<db.tns>192.168.50.155:1521/bsmp</db.tns>
+	<!--<db.user>op_iqis</db.user>-->
+	<!--<db.pwd>iqis168</db.pwd>-->
+	 <db.user>ys_iqis</db.user>
+	 <db.pwd>iqis888</db.pwd>
+    <!-- citycode -->
+	<citycode>testcity</citycode>
+	
+	<!-- # catalog config -->
+	<hiveTableList>
+		<hiveItem>
+			<topic>WebStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>20</partdate.field.index>
+			<tablename>WebStatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/webstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>WebClickStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>7</partdate.field.index>
+			<tablename>webclickstatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/webclickstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>DevOltUserQosStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>38</partdate.field.index>
+			<tablename>hive_report_user_olt_min</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/hive_report_user_olt_min/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>GroupDirectStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>20</partdate.field.index>
+			<tablename>directionstatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/directionstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>AllDirectStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>20</partdate.field.index>
+			<tablename>directionstatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/directionstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>CustomDirectStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>20</partdate.field.index>
+			<tablename>directionstatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/directionstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>DnsStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>5</partdate.field.index>
+			<tablename>dnsstatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/dnsstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+		<hiveItem>
+			<topic>RadiusStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>20</partdate.field.index>
+			<tablename>radiusstatis</tablename>
+			<hdfs.path>/user/hive/warehouse/dgmobile.db/radiusstatis/</hdfs.path>
+			<sync.time.interval>300</sync.time.interval>
+			<sync.count>300000</sync.count>
+		</hiveItem>
+	</hiveTableList>
+	<oracleTableList>
+		<oraItem>
+			<topic>AppStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>14</partdate.field.index>
+			<date.field.indexs>13,14,15</date.field.indexs>
+			<sql>
+			INSERT INTO REPORT_QUALITY_APP_MIN(APPTRAFFIC_UP,APPTRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,CATALOGID,CLASSID,NODETIME,R_STATTIME,ENDTIME) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'))
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>LinkStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>2,3,4</date.field.indexs>
+			<sql>
+			INSERT INTO REPORT_FLOW_MONITOR_MIN(TRAFFIC_UP,TRAFFIC_DN,NODETIME,R_STATTIME,ENDTIME,LINK_CODE,SERVICE_TYPE) VALUES(?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DnsQosStatis</topic>
+			<threadNum>2</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+			INSERT INTO REPORT_FLOW_DNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DNSRESPONSETIMES,SERVICE_TYPE) VALUES(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>QosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+			INSERT INTO REPORT_FLOW_QUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,SERVICE_TYPE) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>RadiusStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>6</partdate.field.index>
+			<date.field.indexs>5,6,7</date.field.indexs>
+			<sql>
+			INSERT INTO REPORT_FLOW_REALTIMEDIAL(DIALSUCTIMES,DIALTIMES,AREA_ID,TOWN_ID,RESEAU_ID,NODETIME,R_STATTIME,ENDTIME) VALUES(?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'))
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		
+		<oraItem>
+			<topic>DevOltQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_DEVICEQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE,DownloadFlow,DownloadTime,DNS_DELAY,DNSANALYTIMES,DNSRESPONSETIMES,DNSANALYSUCTIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'), ?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevBrasQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_DEVICEQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE,DownloadFlow,DownloadTime,DNS_DELAY,DNSANALYTIMES,DNSRESPONSETIMES,DNSANALYSUCTIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'), ?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevBngQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_BNGQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE,DownloadFlow,DownloadTime,DNS_DELAY,DNSANALYTIMES,DNSRESPONSETIMES,DNSANALYSUCTIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'), ?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevSRQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_BNGQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE,DownloadFlow,DownloadTime,DNS_DELAY,DNSANALYTIMES,DNSRESPONSETIMES,DNSANALYSUCTIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'), ?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevSWQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_BNGQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE,DownloadFlow,DownloadTime,DNS_DELAY,DNSANALYTIMES,DNSRESPONSETIMES,DNSANALYSUCTIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'), ?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevBrasDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_DEVICEDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevOltDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_DEVICEDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevBngDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_BNGDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevSRDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_BNGDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevSWDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_BNGDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevIcpDomainQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_ICPWEBQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DOMAIN,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'), ?,'?',?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevIcpDomainDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_ICPWEBDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,DOMAIN,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,'?',?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>WebViewQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>1</partdate.field.index>
+			<date.field.indexs>0,1,2</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FOCUS_APP_MIN(NODETIME,R_STATTIME,ENDTIME,FOCUSAPP_ID,FOCUSTYPE_ID,TRAFFIC_UP,TRAFFIC_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,HTTPREQCOUNT,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,DOWNLOAD_TRAFFIC,DOWNLOAD_FLOWTIME,DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,DNSRESPONSETIMES,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DNS_SESSION_SUC_COUNT,FIRSTSCREEN_LOADING_COUNT,FIRSTSCREEN_LOADINGTIME,NORMAL_FLAG,SERVICE_ACCOUNT)VALUES(to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?')
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<!--care-->
+		<oraItem>
+			<topic>GameQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>1</partdate.field.index>
+			<date.field.indexs>0,1,2</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FOCUS_GAME_MIN(NODETIME,R_STATTIME,ENDTIME,FOCUSAPP_ID,FOCUSTYPE_ID,TRAFFIC_UP,TRAFFIC_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,HTTPREQCOUNT,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,DOWNLOAD_TRAFFIC,DOWNLOAD_FLOWTIME,DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,DNSRESPONSETIMES,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DNS_SESSION_SUC_COUNT,GAME_PING_DELAY,GAME_PINGPKG_COUNT,GAME_PINGPKGFAIL_COUNT,SERVICE_ACCOUNT,UIGAMEPINGDELAYCOUNT)VALUES(to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevPonQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_PONQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevPonDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_PONDNS( DNS_DELAY, DNSANALYTIMES, DNSANALYSUCTIMES, R_STATTIME, ENDTIME, DEVICE_TYPE, DEVICE_ID, DNSRESPONSETIMES, DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevAppQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_APPQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,APP_TYPE,APP_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		<oraItem>
+			<topic>DevAppDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_APPDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,APP_TYPE,APP_ID,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT)values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<!--care-->
+		<oraItem>
+			<topic>DevCustomSingleUserQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_USERQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,SERVICE_ACCOUNT,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,'?',?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		
+		<oraItem>
+			<topic>DevCustomSingleUserDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_USERDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME,ENDTIME,DEVICE_TYPE,SERVICE_ACCOUNT,DNSRESPONSETIMES,DNS_SESSION_SUC_COUNT) values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,'?',?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		<oraItem>
+			<topic>DevCustomUserGroupQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>22</partdate.field.index>
+			<date.field.indexs>21,22,23</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_USERGROUPQUOTA(TRAFFIC_UP,TRAFFIC_DN,TCPDATAPACKAGE_UP,TCPDATAPACKAGE_DN,TCPCONNECT_COUNT,TCPSUCCESSCONNECT_COUNT,TCPDATAPACKAGE_COUNT,TCPRETRANSMIT_COUNT,SHAKEHANDS_DELAY,CLIENT_DELAY,SERVER_DELAY,FIRSTBYTE_LOADINGTIME,HTTP_DELAY,HTTPGETTIMES,HTTPGETSUCTIMES,HTTPPOSTTIMES,HTTPPOSTSUCTIMES,RESPONSETIMES,RESPONSESUCTIMES,RESPONSEERRORTIMES,RESPONSEREDIRECTTIMES,NODETIME,R_STATTIME,ENDTIME,DEVICE_TYPE,DEVICE_ID,TCPUPDATAPKGS,TCPUPRECON,TCPDOWNDATAPKGS,TCPDOWNRECON,FIRSTHANDSHAKESYN_COUNT,SECONDHANDSHAKESYNACK_COUNT,THIRDHANDSHAKEACK_COUNT,HTTPREQUEST_DELAY,HTTPRESP_DELAY,HTTPLOAD_DELAY,TCP_CONNECT_SUC_COUNT,HTTP_SESSION_SUC_COUNT,DEVICE_NAME,USERACCESSSUCCOUNT,USERACCESSFAILCOUNT,USERACCESSALLCOUNT,ABNORMALOFFLINECOUNT,USERLOSECONNECTCOUNT,USERONLINECOUNT,HTTPREQCOUNT,TERMINALTYPE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,'?',?,?,?,?,?,?,?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+	
+		<oraItem>
+			<topic>DevCustomUserGroupDnsQosStatis</topic>
+			<threadNum>1</threadNum>
+			<partdate.field.index>3</partdate.field.index>
+			<date.field.indexs>3,4</date.field.indexs>
+			<sql>
+				INSERT INTO REPORT_FLOW_USERGROUPDNS(DNS_DELAY,DNSANALYTIMES,DNSANALYSUCTIMES,R_STATTIME, ENDTIME, DEVICE_TYPE, DEVICE_ID, DNSRESPONSETIMES, DNS_SESSION_SUC_COUNT) values(?,?,?,to_date('?', 'yyyy-mm-dd hh24:mi:ss'),to_date('?', 'yyyy-mm-dd hh24:mi:ss'),?,'?',?,?)
+			</sql>
+			<sync.time.interval>30</sync.time.interval>
+			<sync.count>300</sync.count>
+		</oraItem>
+		
+		
+		
+		
+		
+	</oracleTableList>
+</config>

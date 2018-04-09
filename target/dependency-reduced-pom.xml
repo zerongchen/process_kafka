@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.aotain</groupId>
+  <artifactId>process_kafka</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer />
+                <transformer>
+                  <mainClass />
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <createDependencyReducedPom>true</createDependencyReducedPom>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <releases />
+      <snapshots />
+      <id>cloudera-repo</id>
+      <name>cloudera repository</name>
+      <url>https://repository.cloudera.com/content/repositories/releases</url>
+    </repository>
+  </repositories>
+</project>
+
